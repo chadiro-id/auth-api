@@ -37,6 +37,11 @@ const createServer = async (container) => {
         return newResponse;
       }
 
+      // mempertahankan penanganan client error oleh hapi secara native, seperti 404, etc.
+      if (!translatedError.isServer) {
+        return h.continue;
+      }
+
       // penanganan server error sesuai kebutuhan
       const newResponse = h.response({
         status: 'error',
