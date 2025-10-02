@@ -1,5 +1,15 @@
 class RegisterUser {
-  constructor({ username, password, fullname }) {
+  constructor(payload) {
+    this._verifyPayload(payload);
+
+    const { username, password, fullname } = payload;
+
+    this.username = username;
+    this.password = password;
+    this.fullname = fullname;
+  }
+
+  _verifyPayload({ username, password, fullname }) {
     if (!username || !password || !fullname) {
       throw new Error('REGISTER_USER.NOT_CONTAIN_NEEDED_PROPERTY');
     }
@@ -12,13 +22,9 @@ class RegisterUser {
       throw new Error('REGISTER_USER.USERNAME_LIMIT_CHAR');
     }
 
-    if (!username.match(/^[a-zA-Z1-9_]+$/)) {
+    if (!username.match(/^[\w]+$/)) {
       throw new Error('REGISTER_USER.USERNAME_CONTAIN_RESTRICTED_CHARACTER');
     }
-
-    this.username = username;
-    this.password = password;
-    this.fullname = fullname;
   }
 }
 
