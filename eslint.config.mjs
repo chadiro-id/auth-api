@@ -14,7 +14,10 @@ export default defineConfig([
   {
     files: ["**/*.js"],
     extends: [daStyle],
-    languageOptions: { sourceType: "commonjs" }
+    languageOptions: { sourceType: "commonjs" },
+    rules: {
+      "indent": ["error", 2, { "SwitchCase": 1 }]
+    }
   },
   {
     files: ["**/*.test.js"],
