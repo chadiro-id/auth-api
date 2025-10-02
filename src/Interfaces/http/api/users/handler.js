@@ -1,4 +1,5 @@
 const AddUserUseCase = require('../../../../Applications/use_case/AddUserUseCase');
+const ClientError = require('../../../../Commons/exceptions/ClientError');
 const DomainErrorTranslator = require('../../../../Commons/exceptions/DomainErrorTranslator');
 
 class UsersHandler {
@@ -24,13 +25,22 @@ class UsersHandler {
       return response;
     } catch (error) {
       const translatedError = DomainErrorTranslator.translate(error);
+      if (translatedError instanceof ClientError) {
+        const response = h.response({
+          status: 'fail',
+          message: translatedError.message,
+        });
+
+        response.code(translatedError.statusCode);
+        return response;
+      }
 
       const response = h.response({
-        status: 'fail',
-        message: translatedError.message,
+        status: 'error',
+        message: 'terjadi kegagalan pada server kami',
       });
 
-      response.code(translatedError.statusCode);
+      response.code(500);
       return response;
     }
   }
