@@ -1,0 +1,16 @@
+# dependencies
+node_modules/
+
+# environtment variables
+.env
+.test.env
+.prod.env
+
+# testing
+/coverage
+
+# debug
+npm-debug.log*
+
+# misc
+*.pem
