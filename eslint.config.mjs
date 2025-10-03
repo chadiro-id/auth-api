@@ -16,7 +16,11 @@ export default defineConfig([
     extends: [daStyle],
     languageOptions: { sourceType: "commonjs" },
     rules: {
-      "indent": ["error", 2, { "SwitchCase": 1 }]
+      "indent": ["error", 2, { "SwitchCase": 1 }],
+      "no-unused-vars": ["error", {
+        "argsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^ignore",
+      }],
     }
   },
   {
