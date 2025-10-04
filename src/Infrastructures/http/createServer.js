@@ -19,6 +19,22 @@ const createServer = async (container) => {
     }
   ]);
 
+  server.auth.strategy('app_jwt', 'jwt', {
+    keys: config.tokenize.accessTokenKey,
+    verify: {
+      aud: false,
+      iss: false,
+      sub: false,
+      maxAgeSec: config.tokenize.accessTokenAge,
+    },
+    validate: (artifacts) => ({
+      isValid: true,
+      credentials: {
+        id: artifacts.decoded.payload.id,
+      },
+    }),
+  });
+
   await server.register([
     {
       plugin: users,
