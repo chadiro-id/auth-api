@@ -23,6 +23,11 @@ const config = {
     password: process.env.PGPASSWORD,
     database: process.env.PGDATABASE,
   },
+  auth: {
+    accessTokenKey: process.env.ACCESS_TOKEN_KEY,
+    accessTokenAge: process.env.ACCESS_TOKEN_AGE,
+    refreshTokenKey: process.env.REFRESH_TOKEN_KEY,
+  }
 };
 
 module.exports = config;
